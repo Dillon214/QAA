@@ -31,17 +31,16 @@ I will be referring to each of the assigned fastq files by the following in my w
 10_2G_both_S8_L008_R1_001.fastq.gz will be referred to as 10R1 \
 10_2G_both_S8_L008_R2_001.fastq.gz will be referred to as 10R2 \
 
-When referring to graphs, code, or other categorized materials, I will direct the reader to the appropriate location via a link. Please look for yellow highlights when mousing over text.
+There are clickable elements available in the downloaded pdf version that will ease your reading experience! 
 
 ### Part 1 – Read quality score distributions
 
 ##### Using FastQC via the command line on Talapas, produce plots of quality score distributions for R1 and R2 reads. Also, produce plots of the per-base N content, and comment on whether or not they are consistent with the quality score plots.
-
-The following command was used to generate FASTQC results...
-
 \
-
-fastqc -f fastq -o . /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz \ /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz \ /projects/bgmp/shared/2017_sequencing/demultiplexed/10_2G_both_S8_L008_R1_001.fastq.gz \ /projects/bgmp/shared/2017_sequencing/demultiplexed/10_2G_both_S8_L008_R2_001.fastq.gz \
+The following command was used to generate FASTQC results...
+\
+\
+fastqc -f fastq -o . /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R1_001.fastq.gz  /projects/bgmp/shared/2017_sequencing/demultiplexed/22_3H_both_S16_L008_R2_001.fastq.gz  /projects/bgmp/shared/2017_sequencing/demultiplexed/10_2G_both_S8_L008_R1_001.fastq.gz  /projects/bgmp/shared/2017_sequencing/demultiplexed/10_2G_both_S8_L008_R2_001.fastq.gz 
 
 \
 
@@ -49,7 +48,14 @@ When comparing each quality score distribution ([10R1_per_base_quality], [10R2_p
 
 On average across all reads in all files, Qscore is typically low within the first 10 positions, and lowest at the very first base. On average across all reads in all files, N content is highest at the first position, evidenced by a small >1% increase.(~0.6 % in R1 files, ~0.95 % in R2 files).
 
+See here the relationship between N content of 10R2 and quality of 10R2:
+
+![](fastqc_results/10_2G_both_S8_L008_R2_001_fastqc/10_2G_both_S8_L008_R2_001_fastqc/Images/per_base_n_content.png){width=50%} 
+![](fastqc_results/10_2G_both_S8_L008_R2_001_fastqc/10_2G_both_S8_L008_R2_001_fastqc/Images/per_base_quality.png){width=50%} \
+
+
 ##### Run your quality score plotting script from your Demultiplexing assignment from Bi622. Describe how the FastQC quality score distribution plots compare to your own. If different, propose an explanation. Also, does the runtime differ? If so, why?
+\
 \
 As far as the general shape, the graphs seem to be in agreement. There do not appear to be obvious differences resulting from disparities in raw data or processing of raw data. If small differences do exist, I would expect them to be due to differnt handling of N quality scores. 
 
@@ -57,9 +63,9 @@ However, the FASTQC graphs differ most significantly from my own in terms of act
 
 Taking [10R1_per_base_quality] as an example, and consulting information found at [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/2%20Per%20Base%20Sequence%20Quality.html), the FASTQC graphs appear to show information on median, interquartile range, 10% and 90% percentile, average, and also includes a color guide for general levels of quality. 
 
-The runtime of my graphing script [Demultiplexing The First sctipt] varied quite a bit depending on the particular input file.
-When run on 10R1 and 10R2, the runtime was an immense 2800 seconds. [Demultiplexing The First runtime information + slurm output for 10R1, 10R2]
-When run on 22R1 and 22R2, the runtime was a short 172 seconds. [Demultiplexing The First runtime information + slurm output for 22R1, 22R2]
+The runtime of my graphing script ([Demultiplexing The First sctipt]) varied quite a bit depending on the particular input file.
+When run on 10R1 and 10R2, the runtime was an immense 2800 seconds. ([Demultiplexing The First runtime information + slurm output for 10R1, 10R2])
+When run on 22R1 and 22R2, the runtime was a short 172 seconds. ([Demultiplexing The First runtime information + slurm output for 22R1, 22R2])
 
 This difference may be attributable to sequence count. The fastqc report indicates that 22R1 and 22R2 each contain 4050899 total sequences while the 10R1 and 10R2 files contain 81477069 total sequences, constituting a 19.11 fold increase in sequences.   
 
@@ -71,9 +77,17 @@ Additionally, the program is written in Java, a language well-known to outstrip 
 
 I make these comments in light of information found [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-##### Comment on the overall data quality of your two libraries.
+See here an easy-view comparison of graphs styles using 10R1_per_base_quality and TF_10R1:  
 
-Both libraries have good data quality. There is little N content in each. Qscores, though worse in each R2, are in the green. None have overrepresented sequences or adapter content. All have some level of sequence duplication and particular enrichment of a kmer. These are more obvious in [10R2_duplication_levels10R2_kmer_profiles] and [22R2_duplication_levels10R2_kmer_profiles]. I suspect these are caused by untrimmed adapters. 
+![](fastqc_results/10_2G_both_S8_L008_R1_001_fastqc/10_2G_both_S8_L008_R1_001_fastqc/Images/per_base_quality.png){width=40%}
+![](the_fitst/_projects_bgmp_shared_2017_sequencing_demultiplexed_10_2G_both_S8_L008_R1_001fastqgz.png){width=40%} \
+
+
+
+##### Comment on the overall data quality of your two libraries.
+\
+\
+Both libraries have good data quality. There is little N content in each. Qscores, though worse in each R2, are in the green. None have overrepresented sequences or adapter content. All have some level of sequence duplication and particular enrichment of a kmer. These are more obvious in ([10R2_duplication_levels10R2_kmer_profiles]) and ([22R2_duplication_levels10R2_kmer_profiles]). I suspect these are caused by untrimmed adapters. 
 
 Overall, good quality. 
 
@@ -86,7 +100,7 @@ Overall, good quality.
 
 * cutadapt --version (should be 3.4)
 * trimmomatic -version (should be 0.39)
-
+\
 \
 
 In /home/dbrowne2/bgmp/bioinfo/Bi623/Assignments/Assignment_QAA
@@ -112,14 +126,19 @@ cutadapt --version
 
 
 ##### Using cutadapt, properly trim adapter sequences from your assigned files. Be sure to read how to use cutadapt. Use default settings. What proportion of reads (both forward and reverse) were trimmed?
+\
 
+See below.
+
+\
 
 ##### Try to determine what the adapters are on your own. If you cannot (or if you do, and want to confirm), click here to see the actual adapter sequences used.
 
 
-
 * Sanity check: Use your Unix skills to search for the adapter sequences in your datasets and confirm the expected sequence orientations. Report the commands you used, the reasoning behind them, and how you confirmed the adapter sequences.
 
+\
+\
 
 I used Illumina's guide to adapter sequence trimming found [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html) and confirmed using the dropdown to identify my adapter sequences.
 
@@ -162,6 +181,8 @@ Pairs written (passing filters):    81,477,069 (100.0%)
 * SLIDING WINDOW: window size of 5 and required quality of 15
 * MINLENGTH: 35 bases
 
+\
+\
 
 trimmomatic PE -phred33 22R1_cut.fastq.gz 22R2_cut_.fastq.gz 22R1_cut_trimmed_paired.fastq.gz 22R1_cut_trimmed_unpaired.fastq.gz 22R2_cut_trimmed_paired.fastq.gz 22R2_cut_trimmed_unpaired.fastq.gz LEADING:3 TRAILING:3 SLIDINGWINDOW:5:15 MINLEN:35
 
@@ -179,12 +200,19 @@ Input Read Pairs: 81477069 Both Surviving: 77520904 (95.14%) Forward Only Surviv
 
 \
 
-Plots at [10R1R2 histogram] and [22R1R2 histogram]
+Plots at ([10R1R2 histogram]) and ([22R1R2 histogram])
 
 I would expect quality trimming to more heavily affect R2s due to chemical degradation. 
 
 As for adapter trimming, I do not know a particular reason to suspect a differnce outside of chemical degradation and temporal separation. 
 I'm not sure if 3' bias plays a role.
+
+
+See below miniaturized plots:
+
+![](10R1R2_HISTO.png){width=50%} 
+![](22R1R2_HISTO.png){width=50%} \
+
 
 
 \newpage
@@ -213,11 +241,13 @@ Used [STAR_BASH_COMMAND] to generate sam files.
 
 ##### Using your script from PS8 in Bi621, report the number of mapped and unmapped reads from each of your 2 sam files. Make sure that your script is looking at the bitwise flag to determine if reads are primary or secondary mapping (update your script if necessary).
 
+\
+
 The program used can be found here [Aligned_vs_unaligned]
 
 python counter2.py -f cutzone/10R1R2_vs_MouseAligned.out.sam
 
-152719556 mapped
+152719556 mapped \
 2322252 unmapped
 
 
